@@ -11,7 +11,8 @@ public class Data {
     private ResultSet rs;
     private String query;
     private List<Producto> producto;
-
+    private List<Venta> venta;
+    
     public Data() throws SQLException, ClassNotFoundException {
         con = new Conexion(
                 "localhost",
@@ -30,8 +31,8 @@ public class Data {
     public void registrarVenta(Venta v) throws SQLException {
 
         con.ejecutar("INSERT INTO venta VALUES (null, "
-                + v.getPkProducto() + ", "
-                + v.getNumVenta() + ", "
+                + v.getNumVenta()+ ", "
+                + v.getPkProducto()+ ", "
                 + v.getCantidad() + ", "
                 + v.getValor() + ")");
     }
@@ -73,4 +74,27 @@ public class Data {
         con.close();
         return producto;
     }
+    
+    public List<Venta> ListarVenta() throws SQLException {
+        query = "select * from venta";
+        venta = new ArrayList<>();
+        Venta v = null;
+
+        rs = con.ejecutarSelect(query);
+        while (rs.next()) {
+            v = new Venta();
+
+           // v.setId(rs.getInt(1));
+            v.setNumVenta(rs.getInt(1));
+            v.setPkProducto(2);
+            v.setValor(rs.getInt(3));
+            v.setCantidad(rs.getInt(4));
+            venta.add(v);
+        }
+        con.close();
+        return venta;
+    }
+    
+    
+    
 }

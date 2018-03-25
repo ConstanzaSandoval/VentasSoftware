@@ -1,7 +1,5 @@
 package model;
 
-
- 
 import java.sql.*; // pack
  
 public class Conexion {

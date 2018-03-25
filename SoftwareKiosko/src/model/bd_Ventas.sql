@@ -10,16 +10,20 @@ create table producto(
     cantidad int,
     primary key(id)
 );
+
+insert into producto values(null, 'leche',12,120 );
 select * from producto;
 
 create table venta( /*SUBTOTAL??*/
     id int auto_increment,
+    numVenta int, /*Es necesario, si ya esta el ID?*/
     pkProducto int,
-    /*numVenta int,/*Es necesario, si ya esta el ID?*/
     cantProducto int,
     valorTotal int,
     primary key(id),
     FOREIGN KEY(pkProducto) REFERENCES producto(id)
 );
+
+select * from venta
 
 

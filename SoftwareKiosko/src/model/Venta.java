@@ -7,8 +7,8 @@ public class Venta {
     valorTotal int,*/
     
     private int id;
-    private int pkProducto;
     private int numVenta;
+    private int pkProducto;
     private int valor;
     private int cantidad;
 
