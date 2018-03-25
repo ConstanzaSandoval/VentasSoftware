@@ -9,19 +9,17 @@ create table producto(
     valor int,
     cantidad int,
     primary key(id)
-
 );
+select * from producto;
 
-create table venta(
+create table venta( /*SUBTOTAL??*/
     id int auto_increment,
     pkProducto int,
-    numVenta int,
+    /*numVenta int,/*Es necesario, si ya esta el ID?*/
     cantProducto int,
     valorTotal int,
     primary key(id),
     FOREIGN KEY(pkProducto) REFERENCES producto(id)
 );
-
-
 
 
