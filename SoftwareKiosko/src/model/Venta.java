@@ -10,6 +10,15 @@ public class Venta {
     private int numVenta;
     private int pkProducto;
     private int valor;
+    private String fecha;
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     private int cantidad;
 
 

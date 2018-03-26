@@ -24,7 +24,10 @@ public class Data {
 
     public void agregarProductos(Producto p) throws SQLException {
 
-        con.ejecutar("INSERT INTO producto VALUES(null, '" + p.getNombre() + "', " + p.getValor() + ", " + p.getCantidad() + ")");
+        con.ejecutar("INSERT INTO producto VALUES(null, "
+                + "'" + p.getNombre() + "', "
+                + "" + p.getValor() + ", "
+                + "" + p.getCantidad() + ")");
 
     }
 
@@ -32,6 +35,7 @@ public class Data {
 
         con.ejecutar("INSERT INTO venta VALUES (null, "
                 + v.getNumVenta() + ", "
+                + "NOW(),"
                 + v.getPkProducto() + ", "
                 + v.getCantidad() + ", "
                 + v.getValor() + ")");
@@ -76,7 +80,7 @@ public class Data {
     }
 
     public List<Venta> ListarVenta() throws SQLException {
-        query = "select venta.numVenta, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
+        query = "SELECT venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
         venta = new ArrayList<>();
         Venta v;
 
@@ -86,9 +90,10 @@ public class Data {
 
             // v.setId(rs.getInt(1));
             v.setNumVenta(rs.getInt(1));
-            v.setPkProducto(rs.getInt(2));
-            v.setCantidad(rs.getInt(3));
-            v.setValor(rs.getInt(4));
+            v.setFecha(rs.getString(2));
+            v.setPkProducto(rs.getInt(3));
+            v.setCantidad(rs.getInt(4));
+            v.setValor(rs.getInt(5));
 
             venta.add(v);
         }
