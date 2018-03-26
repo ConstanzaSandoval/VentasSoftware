@@ -1,6 +1,7 @@
 package model;
 
 public class Producto {
+
     private int id;
     private String nombre;
     private int valor;
@@ -16,7 +17,7 @@ public class Producto {
 
     public Producto() {
     }
-    
+
     public int getId() {
         return id;
     }
@@ -40,8 +41,10 @@ public class Producto {
     public void setValor(int valor) {
         this.valor = valor;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {//para obtener nombre del producto desde la tabla VENTAS
+        return nombre;
+    }
+
 }

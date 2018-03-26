@@ -80,7 +80,7 @@ public class Data {
     }
 
     public List<Venta> ListarVenta() throws SQLException {
-        query = "SELECT venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
+        query = "select venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
         venta = new ArrayList<>();
         Venta v;
 
@@ -99,6 +99,23 @@ public class Data {
         }
         con.close();
         return venta;
+    }
+
+    public List<Producto> rescatarNombreProducto(int id) throws SQLException {
+        query = "select producto.nombre from producto where producto.id =" + id;
+        producto = new ArrayList<>();
+        Producto p;
+        rs = con.ejecutarSelect(query);
+
+        if (rs.next()) {
+            p = new Producto();
+            p.setNombre(rs.getString(1));
+
+            producto.add(p);
+        }
+
+        con.close();
+        return producto;
     }
 
 }

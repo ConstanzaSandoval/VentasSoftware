@@ -361,6 +361,8 @@
                                           <Component id="txtNumVenta" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtFechaVenta" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnVerProductos" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnLimpiarVenta" min="-2" pref="119" max="-2" attributes="0"/>
@@ -409,6 +411,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtProductoVenta" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnVerProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -433,7 +436,7 @@
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jScrollPane4" min="-2" pref="188" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -470,6 +473,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProductoVenta">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtValorVenta">
               <Properties>
@@ -588,6 +594,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabProductos2MouseReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -600,6 +609,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnVerProductos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver ventas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerProductosActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -978,7 +995,7 @@
                           <Component id="jLabel11" min="-2" pref="97" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="104" max="32767" attributes="0"/>
+                  <EmptySpace pref="150" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -27,9 +27,9 @@ public class Ventas extends javax.swing.JFrame {
         try {
             initComponents();
             setLocationRelativeTo(this);
-            setBounds(400, 90, 600,600);
+            setBounds(400, 90, 600, 600);
             jDesktopPane1.setBackground(new Color(175, 238, 238));
-           // setBackground(new Color(153, 50, 204));
+            // setBackground(new Color(153, 50, 204));
             producto = new ArrayList<>();
             venta = new ArrayList<>();
             d = new Data();
@@ -85,6 +85,7 @@ public class Ventas extends javax.swing.JFrame {
         tabProductos2 = new javax.swing.JTable();
         txtBuscarProductoVenta = new javax.swing.JTextField();
         btnBuscarProductoVenta = new javax.swing.JButton();
+        btnVerProductos = new javax.swing.JButton();
         frameBoleta = new javax.swing.JFrame();
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -308,6 +309,8 @@ public class Ventas extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Valor total:");
 
+        txtProductoVenta.setEditable(false);
+
         txtValorVenta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtValorVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,10 +381,22 @@ public class Ventas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabProductos2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tabProductos2MouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabProductos2);
 
         btnBuscarProductoVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnBuscarProductoVenta.setText("Buscar");
+
+        btnVerProductos.setText("Ver ventas");
+        btnVerProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerProductosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -408,7 +423,9 @@ public class Ventas extends javax.swing.JFrame {
                                     .addComponent(SpinVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                                     .addComponent(txtProductoVenta)
                                     .addComponent(txtNumVenta)
-                                    .addComponent(txtFechaVenta)))
+                                    .addComponent(txtFechaVenta))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVerProductos))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnLimpiarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -444,7 +461,8 @@ public class Ventas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProductoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(btnVerProductos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -462,7 +480,7 @@ public class Ventas extends javax.swing.JFrame {
                             .addComponent(txtValorVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -677,7 +695,7 @@ public class Ventas extends javax.swing.JFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -816,16 +834,16 @@ public class Ventas extends javax.swing.JFrame {
     private void menuRegistroPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistroPActionPerformed
         frameRegistroP.setVisible(true);
         frameRegistroP.setLocationRelativeTo(this);
-        frameRegistroP.setBounds(550,200, 400, 400);
-       // jFrame1.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
-       // jFrame2.setVisible(true);    
+        frameRegistroP.setBounds(550, 200, 400, 400);
+        // jFrame1.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
+        // jFrame2.setVisible(true);    
     }//GEN-LAST:event_menuRegistroPActionPerformed
 
     private void menuVerPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerPActionPerformed
         mostrarTabla();
         frameVerP.setLocationRelativeTo(this);
-        frameVerP.setBounds(400,100, 600, 530);
-       // jFrame1.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
+        frameVerP.setBounds(400, 100, 600, 530);
+        // jFrame1.setBounds(WIDTH, WIDTH, WIDTH, HEIGHT);
         frameVerP.setVisible(true);
     }//GEN-LAST:event_menuVerPActionPerformed
 
@@ -860,7 +878,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnAceptarBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarBoletaActionPerformed
-       frameBoleta.setVisible(false);
+        frameBoleta.setVisible(false);
     }//GEN-LAST:event_btnAceptarBoletaActionPerformed
 
     private void btnVerBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerBoletaActionPerformed
@@ -870,16 +888,44 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerBoletaActionPerformed
 
     private void btnCerrarVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarVerVentasActionPerformed
-       frameVerVentas.setVisible(false);
+        frameVerVentas.setVisible(false);
     }//GEN-LAST:event_btnCerrarVerVentasActionPerformed
 
     private void menuVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerVentasActionPerformed
         frameVerVentas.setVisible(true);
         frameVerVentas.setLocationRelativeTo(this);
         frameVerVentas.setBounds(400, 100, 410, 450);
-       
-        
+
+
     }//GEN-LAST:event_menuVerVentasActionPerformed
+
+    private void tabProductos2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabProductos2MouseReleased
+        if (evt.getClickCount() == 1) {//evento para el click
+            System.out.println("Un clic");
+            int row = tabProductos2.getSelectedRow();
+//            System.out.println(row);
+
+            TMVenta ventass = (TMVenta) tabProductos2.getModel();
+            Venta v = ventass.getVenta(row);
+
+//            txtProductoVenta.setText(Integer.toString(v.getValor()));
+            int in = v.getPkProducto();
+
+            try {
+                d.rescatarNombreProducto(in);
+                txtProductoVenta.setText(d.rescatarNombreProducto(in).toString());
+                System.out.println("jkas: "+ d.rescatarNombreProducto(in).toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_tabProductos2MouseReleased
+
+    private void btnVerProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProductosActionPerformed
+        mostrarVentas();
+    }//GEN-LAST:event_btnVerProductosActionPerformed
 
     public static void main(String args[]) {
 
@@ -905,6 +951,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegistrarVenta;
     private javax.swing.JButton btnVerBoleta;
+    private javax.swing.JButton btnVerProductos;
     private javax.swing.JFrame frameBoleta;
     private javax.swing.JFrame frameRegistroP;
     private javax.swing.JFrame frameRegistroVenta;
@@ -980,7 +1027,7 @@ public class Ventas extends javax.swing.JFrame {
         try {
             List<Venta> ventas = d.ListarVenta();
             TMVenta tm = new TMVenta(ventas);
-            tabVentas.setModel(tm);
+            tabProductos2.setModel(tm);
         } catch (SQLException ex) {
             Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -994,6 +1041,5 @@ public class Ventas extends javax.swing.JFrame {
         txtValorVenta.setText("");
         txtNumVenta.requestFocus();
     }
-    
-   
+
 }

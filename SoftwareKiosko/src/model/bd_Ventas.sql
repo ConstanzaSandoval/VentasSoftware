@@ -25,10 +25,14 @@ create table venta( /*SUBTOTAL??*/
     FOREIGN KEY(pkProducto) REFERENCES producto(id)
 );
 
-insert into venta values(null,1,1,5,120);
+insert into venta values(null,1,'2018/03/26', 1, 4, 120);
 
-select venta.numVenta, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta
+select venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta
 
 select * from venta
 
 select now()
+
+select producto.nombre 
+from producto
+where producto.id = 1;

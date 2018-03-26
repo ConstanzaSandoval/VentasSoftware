@@ -5,7 +5,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 public class TMVenta implements TableModel {
-    
+
     private List<Venta> ventas;
 
     public TMVenta(List<Venta> ventas) {
@@ -18,12 +18,12 @@ public class TMVenta implements TableModel {
 
     @Override
     public int getRowCount() {
-       return ventas.size();
+        return ventas.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -32,11 +32,17 @@ public class TMVenta implements TableModel {
             case 0:
                 return "Num Venta";
             case 1:
-                return "Producto";
+                return "Fecha";
+
             case 2:
+                return "Producto";
+
+            case 3:
                 return "Cantidad";
+
             default:
                 return "Valor Total";
+
         }
     }
 
@@ -52,19 +58,25 @@ public class TMVenta implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-            
+
         Venta v = ventas.get(rowIndex);
-        
-        switch(columnIndex){
-            case 0 :
+
+        switch (columnIndex) {
+            case 0:
                 return v.getNumVenta();
             case 1:
-                return v.getPkProducto();
+                return v.getFecha();
+
             case 2:
+                return v.getPkProducto();
+
+            case 3:
                 return v.getCantidad();
+
             default:
-                return v.getValor();      
-        }  
+                return v.getValor();
+
+        }
     }
 
     @Override
@@ -78,5 +90,5 @@ public class TMVenta implements TableModel {
     @Override
     public void removeTableModelListener(TableModelListener l) {
     }
-    
+
 }
