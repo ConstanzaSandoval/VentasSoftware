@@ -12,7 +12,7 @@ public class Data {
     private String query;
     private List<Producto> producto;
     private List<Venta> venta;
-    
+
     public Data() throws SQLException, ClassNotFoundException {
         con = new Conexion(
                 "localhost",
@@ -31,8 +31,8 @@ public class Data {
     public void registrarVenta(Venta v) throws SQLException {
 
         con.ejecutar("INSERT INTO venta VALUES (null, "
-                + v.getNumVenta()+ ", "
-                + v.getPkProducto()+ ", "
+                + v.getNumVenta() + ", "
+                + v.getPkProducto() + ", "
                 + v.getCantidad() + ", "
                 + v.getValor() + ")");
     }
@@ -56,15 +56,15 @@ public class Data {
         return producto;
     }
 
-    public List<Producto> buscarProducto(String buscador) throws SQLException{//Por si buscamos productos ;-;
-        query = "select * from producto where nombre like '%"+buscador+"%'";
+    public List<Producto> buscarProducto(String buscador) throws SQLException {//Por si buscamos productos ;-;
+        query = "select * from producto where nombre like '%" + buscador + "%'";
         producto = new ArrayList<>();
         Producto p;
-        
+
         rs = con.ejecutarSelect(query);
-        while(rs.next()){//por si hay mas de un producto ;-; ..si no, IF
+        while (rs.next()) {//por si hay mas de un producto ;-; ..si no, IF
             p = new Producto();
-            
+
             p.setId(rs.getInt(1));
             p.setNombre(rs.getString(2));
             p.setValor(rs.getInt(3));
@@ -74,27 +74,26 @@ public class Data {
         con.close();
         return producto;
     }
-    
+
     public List<Venta> ListarVenta() throws SQLException {
-        query = "select * from venta";
+        query = "select venta.numVenta, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
         venta = new ArrayList<>();
-        Venta v = null;
+        Venta v;
 
         rs = con.ejecutarSelect(query);
         while (rs.next()) {
             v = new Venta();
 
-           // v.setId(rs.getInt(1));
+            // v.setId(rs.getInt(1));
             v.setNumVenta(rs.getInt(1));
-            v.setPkProducto(2);
-            v.setValor(rs.getInt(3));
-            v.setCantidad(rs.getInt(4));
+            v.setPkProducto(rs.getInt(2));
+            v.setCantidad(rs.getInt(3));
+            v.setValor(rs.getInt(4));
+
             venta.add(v);
         }
         con.close();
         return venta;
     }
-    
-    
-    
+
 }

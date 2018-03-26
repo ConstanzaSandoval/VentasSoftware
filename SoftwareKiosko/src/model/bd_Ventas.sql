@@ -23,6 +23,7 @@ create table venta( /*SUBTOTAL??*/
     primary key(id),
     FOREIGN KEY(pkProducto) REFERENCES producto(id)
 );
+select venta.numVenta, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta
 
 select * from venta
 

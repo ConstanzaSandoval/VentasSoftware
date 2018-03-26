@@ -63,7 +63,7 @@ public class Ventas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Productos", 0, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Producto :");
@@ -160,7 +160,7 @@ public class Ventas extends javax.swing.JFrame {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("No hace nada, solo esta ahi c:"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ahora hace algo c:"));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Producto :");
@@ -178,6 +178,8 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        SpinVenta.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         btnRegistrarVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnRegistrarVenta.setText("Registrar Venta");
         btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -191,13 +193,13 @@ public class Ventas extends javax.swing.JFrame {
 
         tabVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane2.setViewportView(tabVentas);
@@ -334,19 +336,21 @@ public class Ventas extends javax.swing.JFrame {
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
         try {
             Venta v = new Venta();
-            
             v.setNumVenta(Integer.parseInt(txtNumVenta.getText()));
             v.setPkProducto(Integer.parseInt(txtProductoVenta.getText()));
             v.setCantidad(Integer.parseInt(SpinVenta.getValue().toString()));
             v.setValor(Integer.parseInt(txtValorVenta.getText()));
-       
-           
             d.registrarVenta(v);
             mostrarVentas();
-        } catch (SQLException ex) {
-            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            String titulo1 = "Error";
+            String mensaje1 = "Ingrese los datos en forma correcta";
+            int tipo1 = JOptionPane.ERROR_MESSAGE;
+            JOptionPane.showMessageDialog(this, mensaje1, titulo1, tipo1);
+            limpiarVenta();
         }
-        
+
+
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -356,9 +360,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnLimpiarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarVentaActionPerformed
-        txtNumVenta.setText("");
-        txtProductoVenta.setText("");
-        SpinVenta.setValue(0);
+        limpiarVenta();
+        //metodo para el limpiar que habia aqui
     }//GEN-LAST:event_btnLimpiarVentaActionPerformed
 
     public static void main(String args[]) {
@@ -414,9 +417,9 @@ public class Ventas extends javax.swing.JFrame {
         }
 
     }
-    
-    private void mostrarVentas(){
-        
+
+    private void mostrarVentas() {
+
         try {
             List<Venta> ventas = d.ListarVenta();
             TMVenta tm = new TMVenta(ventas);
@@ -424,8 +427,15 @@ public class Ventas extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
+
+    }
+
+    private void limpiarVenta() {
+        txtNumVenta.setText("");
+        txtProductoVenta.setText("");
+        SpinVenta.setValue(0);
+        txtValorVenta.setText("");
+        txtNumVenta.requestFocus();
     }
 
 }
