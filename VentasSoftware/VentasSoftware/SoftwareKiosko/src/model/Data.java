@@ -79,8 +79,52 @@ public class Data {
         return producto;
     }
 
+    public List<Venta> BuscarVenta(String fechaInicio, String fechaFin) throws SQLException{
+        query = "SELECT * FROM venta WHERE venta.fecha between "+fechaInicio+" AND "+fechaFin+"";
+        List<Venta> list = new ArrayList<>();
+        Venta v;
+
+        rs = con.ejecutarSelect(query);
+        while (rs.next()) {
+            v = new Venta();
+
+            v.setId(rs.getInt(1));
+            v.setNumVenta(rs.getInt(2));
+            v.setFecha(rs.getString(3));
+            v.setPkProducto(rs.getInt(4));
+            v.setCantidad(rs.getInt(5));
+            v.setValor(rs.getInt(6));
+
+            venta.add(v);
+        }
+        con.close();
+        return list;
+    }
+    
+    public List<Venta> BuscarVenta(int filtro) throws SQLException{
+        query = "SELECT * FROM venta WHERE venta.numVenta = "+filtro;
+        List<Venta> list = new ArrayList<>();
+        Venta v;
+
+        rs = con.ejecutarSelect(query);
+        while (rs.next()) {
+            v = new Venta();
+
+            v.setId(rs.getInt(1));
+            v.setNumVenta(rs.getInt(2));
+            v.setFecha(rs.getString(3));
+            v.setPkProducto(rs.getInt(4));
+            v.setCantidad(rs.getInt(5));
+            v.setValor(rs.getInt(6));
+
+            venta.add(v);
+        }
+        con.close();
+        return list;
+    }
+    
     public List<Venta> ListarVenta() throws SQLException {
-        query = "SELECT venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal FROM venta";
+        query = "SELECT * FROM venta ORDER BY venta.fecha ASC";
         venta = new ArrayList<>();
         Venta v;
 
@@ -88,12 +132,12 @@ public class Data {
         while (rs.next()) {
             v = new Venta();
 
-            // v.setId(rs.getInt(1));
-            v.setNumVenta(rs.getInt(1));
-            v.setFecha(rs.getString(2));
-            v.setPkProducto(rs.getInt(3));
-            v.setCantidad(rs.getInt(4));
-            v.setValor(rs.getInt(5));
+            v.setId(rs.getInt(1));
+            v.setNumVenta(rs.getInt(2));
+            v.setFecha(rs.getString(3));
+            v.setPkProducto(rs.getInt(4));
+            v.setCantidad(rs.getInt(5));
+            v.setValor(rs.getInt(6));
 
             venta.add(v);
         }

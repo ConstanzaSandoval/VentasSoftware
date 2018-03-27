@@ -24,6 +24,7 @@ public class Ventas extends javax.swing.JFrame {
     Producto p = new Producto();
     int IDProducto = 0;
     int valorTotal = 0;
+    int valorBoletaFinal = 0;
 
     public Ventas() {
         try {
@@ -92,17 +93,21 @@ public class Ventas extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabBoleta = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtValorTotalB = new javax.swing.JTextField();
         btnAceptarBoleta = new javax.swing.JButton();
         frameVerVentas = new javax.swing.JFrame();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableVerVentas = new javax.swing.JTable();
         btnCerrarVerVentas = new javax.swing.JButton();
         txtBuscarVerVentas = new javax.swing.JTextField();
         btnBuscarVerVentas = new javax.swing.JButton();
+        dateChDesde = new com.toedter.calendar.JDateChooser();
+        dateChHasta = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -303,6 +308,11 @@ public class Ventas extends javax.swing.JFrame {
         frameRegistroVenta.addWindowStateListener(new java.awt.event.WindowStateListener() {
             public void windowStateChanged(java.awt.event.WindowEvent evt) {
                 frameRegistroVentaWindowStateChanged(evt);
+            }
+        });
+        frameRegistroVenta.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                frameRegistroVentaWindowActivated(evt);
             }
         });
 
@@ -525,7 +535,7 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabBoleta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -536,10 +546,17 @@ public class Ventas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tabBoleta);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Valor Total : ");
+
+        txtValorTotalB.setEditable(false);
+        txtValorTotalB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorTotalBActionPerformed(evt);
+            }
+        });
 
         btnAceptarBoleta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAceptarBoleta.setText("Aceptar");
@@ -554,38 +571,37 @@ public class Ventas extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtValorTotalB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(btnAceptarBoleta)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtValorTotalB, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(btnAceptarBoleta, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(98, 98, 98))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtValorTotalB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptarBoleta)
-                    .addComponent(jButton2))
-                .addGap(21, 21, 21))
+                    .addComponent(jButton2)
+                    .addComponent(btnAceptarBoleta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout frameBoletaLayout = new javax.swing.GroupLayout(frameBoleta.getContentPane());
@@ -595,7 +611,7 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(frameBoletaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         frameBoletaLayout.setVerticalGroup(
             frameBoletaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,7 +623,7 @@ public class Ventas extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ver Ventas", 0, 0, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableVerVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -618,7 +634,7 @@ public class Ventas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        jScrollPane5.setViewportView(tableVerVentas);
 
         btnCerrarVerVentas.setText("Cerrar");
         btnCerrarVerVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -628,6 +644,15 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         btnBuscarVerVentas.setText("Buscar");
+        btnBuscarVerVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVerVentasActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Desde: ");
+
+        jLabel13.setText("Hasta");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -637,30 +662,47 @@ public class Ventas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtBuscarVerVentas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarVerVentas)
-                .addContainerGap())
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCerrarVerVentas)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(dateChDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(146, 146, 146)
+                                .addComponent(jLabel13)))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateChDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrarVerVentas)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout frameVerVentasLayout = new javax.swing.GroupLayout(frameVerVentas.getContentPane());
@@ -824,6 +866,7 @@ public class Ventas extends javax.swing.JFrame {
             valorTotal = valorCantProductos + valorTotal;
             txtValorVenta.setText(String.valueOf(valorTotal));
             System.out.println(valorTotal);
+
         } catch (Exception e) {
             String titulo1 = "Error";
             String mensaje1 = "Ingrese los datos en forma correcta";
@@ -910,8 +953,7 @@ public class Ventas extends javax.swing.JFrame {
             v.setCantidad(Integer.parseInt(SpinVenta.getValue().toString()));
             v.setValor(Integer.parseInt(txtValorVenta.getText()));
             d.registrarVenta(v);
-            
-            
+
             frameBoleta.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
@@ -923,6 +965,8 @@ public class Ventas extends javax.swing.JFrame {
         frameBoleta.setVisible(true);
         frameBoleta.setLocationRelativeTo(this);
         frameBoleta.setBounds(400, 100, 410, 550);
+        mostrarVentasBoleta();
+        txtValorTotalB.setText("" + valorBoletaFinal);
     }//GEN-LAST:event_btnVerBoletaActionPerformed
 
     private void btnCerrarVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarVerVentasActionPerformed
@@ -934,24 +978,36 @@ public class Ventas extends javax.swing.JFrame {
         frameVerVentas.setLocationRelativeTo(this);
         frameVerVentas.setBounds(400, 100, 410, 450);
 
+        try {
+            List<Venta> venta = d.ListarVenta();
+            TMVenta tabla = new TMVenta(venta);
+            tableVerVentas.setModel(tabla);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_menuVerVentasActionPerformed
 
     private void tabProductos2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabProductos2MouseReleased
         if (evt.getClickCount() == 1) {//evento para el click
-            int subtotal=0;
+            int subtotal = 0;
+            int acu;
             System.out.println("Un clic");
             int row = tabProductos2.getSelectedRow();
 //            System.out.println(row);
 
             TMProductos produc = (TMProductos) tabProductos2.getModel();
             Producto v = produc.getProductos(row);
-            
+
             int valor = v.getValor();
             String canti = SpinVenta.getValue().toString();
             int cantidad = Integer.parseInt(canti);
             subtotal = valor * cantidad;
-            txtValorVenta.setText(""+subtotal);
+            txtValorVenta.setText("" + subtotal);
+
+            valorBoletaFinal = 0 + subtotal;
+
             IDProducto = v.getId();
             try {
                 d.rescatarNombreProducto(IDProducto);
@@ -975,7 +1031,7 @@ public class Ventas extends javax.swing.JFrame {
             List<Producto> list = d.buscarProducto(text);
             TMProductos model = new TMProductos(list);
             tabProductos2.setModel(model);
-            
+
         } catch (SQLException ex) {
             //mensaje joption
             Logger.getLogger(Venta.class.getName()).log(Level.SEVERE, null, ex);
@@ -983,14 +1039,61 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarProductoVentaActionPerformed
 
     private void frameRegistroVentaWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_frameRegistroVentaWindowStateChanged
-        if (frameRegistroVenta.isVisible()){
+        if (frameRegistroVenta.isVisible()) {
             try {
-                txtNumVenta.setText(String.valueOf(d.getUltimaVenta())+1);
+                txtNumVenta.setText(String.valueOf(d.getUltimaVenta()) + 1);
             } catch (SQLException ex) {
                 Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_frameRegistroVentaWindowStateChanged
+
+    private void txtValorTotalBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTotalBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorTotalBActionPerformed
+
+    private void frameRegistroVentaWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_frameRegistroVentaWindowActivated
+        if (frameRegistroVenta.isVisible()) {
+            try {
+                int idV = d.getUltimaVenta() + 1;
+                System.out.println(idV);
+                txtNumVenta.setText(String.valueOf(idV));
+                txtNumVenta.setEditable(false);
+            } catch (Exception ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_frameRegistroVentaWindowActivated
+
+    private void btnBuscarVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVerVentasActionPerformed
+
+        String desde = dateChDesde.getDate().toString();
+        String hasta = dateChDesde.getDate().toString();
+        String filtro = txtBuscarVerVentas.getText();
+
+        if (filtro.isEmpty()) {
+            try {
+                List<Venta> venta = d.BuscarVenta(desde, hasta);
+                TMVenta tabla = new TMVenta(venta);
+                tableVerVentas.setModel(tabla);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                List<Venta> venta = d.BuscarVenta(Integer.parseInt(filtro));
+                TMVenta tabla = new TMVenta(venta);
+                tableVerVentas.setModel(tabla);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+    }//GEN-LAST:event_btnBuscarVerVentasActionPerformed
 
     public static void main(String args[]) {
 
@@ -1017,6 +1120,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVerBoleta;
     private javax.swing.JButton btnVerProductos;
+    private com.toedter.calendar.JDateChooser dateChDesde;
+    private com.toedter.calendar.JDateChooser dateChHasta;
     private javax.swing.JFrame frameBoleta;
     private javax.swing.JFrame frameRegistroP;
     private javax.swing.JFrame frameRegistroVenta;
@@ -1027,6 +1132,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1047,16 +1154,16 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JMenuItem menuRegistroP;
     private javax.swing.JMenuItem menuRegistroVentas;
     private javax.swing.JMenuItem menuVerP;
     private javax.swing.JMenuItem menuVerVentas;
     private javax.swing.JSpinner spinCantidadProducto;
+    private javax.swing.JTable tabBoleta;
     private javax.swing.JTable tabProductos2;
     private javax.swing.JTable tabVentas;
     private javax.swing.JTable tablaProductos;
+    private javax.swing.JTable tableVerVentas;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtBuscarProductoVenta;
     private javax.swing.JTextField txtBuscarVerVentas;
@@ -1111,12 +1218,33 @@ public class Ventas extends javax.swing.JFrame {
 
     }
 
+    private void mostrarVentasBoleta() {
+
+        try {
+            List<Venta> ventas = d.ListarVentaPor(Integer.parseInt(txtNumVenta.getText()));
+            TMVenta tm = new TMVenta(ventas);
+            tabBoleta.setModel(tm);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     private void limpiarVenta() {
-        txtNumVenta.setText("");
+
         txtProductoVenta.setText("");
         SpinVenta.setValue(0);
         txtValorVenta.setText("");
         txtNumVenta.requestFocus();
+
+        try {
+            List<Venta> ventas = d.ListarVentaPor(0);
+            TMVenta tm = new TMVenta(ventas);
+            tabVentas.setModel(tm);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
