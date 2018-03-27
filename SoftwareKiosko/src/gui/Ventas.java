@@ -22,6 +22,7 @@ public class Ventas extends javax.swing.JFrame {
     private List<Venta> venta;
     private Data d;
     Producto p = new Producto();
+    int IDProducto = 0;
 
     public Ventas() {
         try {
@@ -359,23 +360,20 @@ public class Ventas extends javax.swing.JFrame {
 
         tabVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane4.setViewportView(tabVentas);
 
         tabProductos2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -391,7 +389,7 @@ public class Ventas extends javax.swing.JFrame {
         btnBuscarProductoVenta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnBuscarProductoVenta.setText("Buscar");
 
-        btnVerProductos.setText("Ver ventas");
+        btnVerProductos.setText("Ver Productos");
         btnVerProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerProductosActionPerformed(evt);
@@ -803,11 +801,12 @@ public class Ventas extends javax.swing.JFrame {
         try {
             Venta v = new Venta();
             v.setNumVenta(Integer.parseInt(txtNumVenta.getText()));
-            v.setPkProducto(Integer.parseInt(txtProductoVenta.getText()));
+            v.setFecha(txtFechaVenta.getText());
+            v.setPkProducto(IDProducto);
             v.setCantidad(Integer.parseInt(SpinVenta.getValue().toString()));
             v.setValor(Integer.parseInt(txtValorVenta.getText()));
             d.registrarVenta(v);
-            mostrarVentas();
+            mostrarTabla();
         } catch (Exception e) {
             String titulo1 = "Error";
             String mensaje1 = "Ingrese los datos en forma correcta";
@@ -905,16 +904,15 @@ public class Ventas extends javax.swing.JFrame {
             int row = tabProductos2.getSelectedRow();
 //            System.out.println(row);
 
-            TMVenta ventass = (TMVenta) tabProductos2.getModel();
-            Venta v = ventass.getVenta(row);
+            TMProductos produc = (TMProductos) tabProductos2.getModel();
+            Producto v = produc.getProductos(row);
 
 //            txtProductoVenta.setText(Integer.toString(v.getValor()));
-            int in = v.getPkProducto();
-
+            IDProducto = v.getId();
             try {
-                d.rescatarNombreProducto(in);
-                txtProductoVenta.setText(d.rescatarNombreProducto(in).toString());
-                System.out.println("jkas: "+ d.rescatarNombreProducto(in).toString());
+                d.rescatarNombreProducto(IDProducto);
+                txtProductoVenta.setText(d.rescatarNombreProducto(IDProducto).toString());
+                System.out.println("jkas: " + d.rescatarNombreProducto(IDProducto).toString());
             } catch (SQLException ex) {
                 Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -924,7 +922,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_tabProductos2MouseReleased
 
     private void btnVerProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProductosActionPerformed
-        mostrarVentas();
+        mostrarTablaParaVenta();
     }//GEN-LAST:event_btnVerProductosActionPerformed
 
     public static void main(String args[]) {
@@ -1015,6 +1013,18 @@ public class Ventas extends javax.swing.JFrame {
             List<Producto> productoss = d.ListarProductos();
             TMProductos tabla = new TMProductos(productoss);
             tablaProductos.setModel(tabla);//nombre de la tabla    }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void mostrarTablaParaVenta() {
+        try {
+            List<Producto> productoss = d.ListarProductos();
+            TMProductos tabla = new TMProductos(productoss);
+            tabProductos2.setModel(tabla);//nombre de la tabla    }
 
         } catch (SQLException ex) {
             Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);

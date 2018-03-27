@@ -44,7 +44,7 @@ public class Data {
     public List<Producto> ListarProductos() throws SQLException {
         query = "select * from producto";
         producto = new ArrayList<>();
-        Producto p = null;
+        Producto p;
 
         rs = con.ejecutarSelect(query);
         while (rs.next()) {
@@ -80,7 +80,7 @@ public class Data {
     }
 
     public List<Venta> ListarVenta() throws SQLException {
-        query = "select venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
+        query = "SELECT venta.numVenta, venta.fecha, venta.pkProducto, venta.cantProducto, venta.valorTotal from venta";
         venta = new ArrayList<>();
         Venta v;
 
