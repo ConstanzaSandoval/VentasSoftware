@@ -44,3 +44,7 @@ select venta.numVenta from venta
 select venta.valorTotal from venta
 
 delete from venta where venta.id = 3 
+
+SELECT * FROM venta WHERE venta.numVenta = 1
+
+SELECT * FROM venta WHERE venta.fecha between '2018/03/25' AND '2018/03/26'

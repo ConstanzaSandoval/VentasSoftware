@@ -2,7 +2,9 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Data {
@@ -79,8 +81,8 @@ public class Data {
         return producto;
     }
 
-    public List<Venta> BuscarVenta(String fechaInicio, String fechaFin) throws SQLException{
-        query = "SELECT * FROM venta WHERE venta.fecha between "+fechaInicio+" AND "+fechaFin+"";
+    public List<Venta> BuscarVentaFecha(String fechaInicio, String fechaFin) throws SQLException {
+        query = "SELECT * FROM venta WHERE venta.fecha BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "'";
         List<Venta> list = new ArrayList<>();
         Venta v;
 
@@ -100,29 +102,7 @@ public class Data {
         con.close();
         return list;
     }
-    
-    public List<Venta> BuscarVenta(int filtro) throws SQLException{
-        query = "SELECT * FROM venta WHERE venta.numVenta = "+filtro;
-        List<Venta> list = new ArrayList<>();
-        Venta v;
 
-        rs = con.ejecutarSelect(query);
-        while (rs.next()) {
-            v = new Venta();
-
-            v.setId(rs.getInt(1));
-            v.setNumVenta(rs.getInt(2));
-            v.setFecha(rs.getString(3));
-            v.setPkProducto(rs.getInt(4));
-            v.setCantidad(rs.getInt(5));
-            v.setValor(rs.getInt(6));
-
-            venta.add(v);
-        }
-        con.close();
-        return list;
-    }
-    
     public List<Venta> ListarVenta() throws SQLException {
         query = "SELECT * FROM venta ORDER BY venta.fecha ASC";
         venta = new ArrayList<>();
@@ -146,12 +126,7 @@ public class Data {
     }
 
     public List<Venta> ListarVentaPor(int idVenta) throws SQLException {
-        query = "SELECT venta.numVenta, "
-                + "venta.fecha, "
-                + "venta.pkProducto, "
-                + "venta.cantProducto, "
-                + "venta.valorTotal "
-                + "FROM venta WHERE venta.numVenta = "+idVenta+"";
+        query = "SELECT * FROM venta WHERE venta.numVenta = " + idVenta + "";
         venta = new ArrayList<>();
         Venta v;
 
@@ -159,19 +134,19 @@ public class Data {
         while (rs.next()) {
             v = new Venta();
 
-            // v.setId(rs.getInt(1));
-            v.setNumVenta(rs.getInt(1));
-            v.setFecha(rs.getString(2));
-            v.setPkProducto(rs.getInt(3));
-            v.setCantidad(rs.getInt(4));
-            v.setValor(rs.getInt(5));
+            v.setId(rs.getInt(1));
+            v.setNumVenta(rs.getInt(2));
+            v.setFecha(rs.getString(3));
+            v.setPkProducto(rs.getInt(4));
+            v.setCantidad(rs.getInt(5));
+            v.setValor(rs.getInt(6));
 
             venta.add(v);
         }
         con.close();
         return venta;
     }
-    
+
     public List<Producto> rescatarNombreProducto(int id) throws SQLException {
         query = "SELECT producto.nombre FROM producto WHERE producto.id =" + id;
         producto = new ArrayList<>();
@@ -188,8 +163,8 @@ public class Data {
         con.close();
         return producto;
     }
-    
-    public int getUltimaVenta() throws SQLException{
+
+    public int getUltimaVenta() throws SQLException {
         int ultimaVenta = 0;
         String lastVenta = "SELECT MAX(numVenta) FROM venta";
         rs = con.ejecutarSelect(lastVenta);
@@ -201,17 +176,26 @@ public class Data {
         }
         con.close();
         return ultimaVenta;
-    
+
     }
 //    //Construyendo xD
 //    public void ActualizarStockVenta(int cantVendida){
 //        
 //        query= "UPDATE producto where ";
 //    }
-    
-    public void quitarProductoVenta(int idP) throws SQLException{
-        query = "DELETE FROM venta WHERE venta.id ="+ idP;
+
+    public void quitarProductoVenta(int idP) throws SQLException {
+        query = "DELETE FROM venta WHERE venta.id =" + idP;
         con.ejecutar(query);
+    }
+
+    public String transformarFecha(Date fecha) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        Date fechaActual = fecha;
+        
+        String fechaConFormato1 = sdf.format(fechaActual);
+        return fechaConFormato1;
     }
 
 }

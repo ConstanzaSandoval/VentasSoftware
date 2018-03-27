@@ -104,10 +104,11 @@ public class Ventas extends javax.swing.JFrame {
         btnCerrarVerVentas = new javax.swing.JButton();
         txtBuscarVerVentas = new javax.swing.JTextField();
         btnBuscarVerVentas = new javax.swing.JButton();
-        dateChDesde = new com.toedter.calendar.JDateChooser();
-        dateChHasta = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        dateChDesde = new com.toedter.calendar.JDateChooser();
+        dateChHasta = new com.toedter.calendar.JDateChooser();
+        btnBuscarFecha = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -652,7 +653,14 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel12.setText("Desde: ");
 
-        jLabel13.setText("Hasta");
+        jLabel13.setText("Hasta:");
+
+        btnBuscarFecha.setText("Buscar");
+        btnBuscarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarFechaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -661,28 +669,30 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtBuscarVerVentas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCerrarVerVentas)
                         .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(dateChDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(txtBuscarVerVentas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(146, 146, 146)
-                                .addComponent(jLabel13)))
-                        .addGap(0, 12, Short.MAX_VALUE))))
+                                .addComponent(dateChDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,12 +704,14 @@ public class Ventas extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dateChDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dateChHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarFecha))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCerrarVerVentas)
                 .addContainerGap())
@@ -865,6 +877,9 @@ public class Ventas extends javax.swing.JFrame {
             int valorCantProductos = Integer.parseInt(txtValorVenta.getText()) * Integer.parseInt(spinCantidadProducto.getValue().toString());
             valorTotal = valorCantProductos + valorTotal;
             txtValorVenta.setText(String.valueOf(valorTotal));
+            valorBoletaFinal *= valorTotal;
+            System.out.println(valorBoletaFinal);
+            txtValorTotalB.setText("" + valorBoletaFinal);
             System.out.println(valorTotal);
 
         } catch (Exception e) {
@@ -964,7 +979,7 @@ public class Ventas extends javax.swing.JFrame {
     private void btnVerBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerBoletaActionPerformed
         frameBoleta.setVisible(true);
         frameBoleta.setLocationRelativeTo(this);
-        frameBoleta.setBounds(400, 100, 410, 550);
+        frameBoleta.setBounds(400, 100, 610, 550);
         mostrarVentasBoleta();
         txtValorTotalB.setText("" + valorBoletaFinal);
     }//GEN-LAST:event_btnVerBoletaActionPerformed
@@ -1006,7 +1021,7 @@ public class Ventas extends javax.swing.JFrame {
             subtotal = valor * cantidad;
             txtValorVenta.setText("" + subtotal);
 
-            valorBoletaFinal = 0 + subtotal;
+            
 
             IDProducto = v.getId();
             try {
@@ -1067,33 +1082,26 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_frameRegistroVentaWindowActivated
 
     private void btnBuscarVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVerVentasActionPerformed
-
-        String desde = dateChDesde.getDate().toString();
-        String hasta = dateChDesde.getDate().toString();
-        String filtro = txtBuscarVerVentas.getText();
-
-        if (filtro.isEmpty()) {
-            try {
-                List<Venta> venta = d.BuscarVenta(desde, hasta);
-                TMVenta tabla = new TMVenta(venta);
-                tableVerVentas.setModel(tabla);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            try {
-                List<Venta> venta = d.BuscarVenta(Integer.parseInt(filtro));
-                TMVenta tabla = new TMVenta(venta);
-                tableVerVentas.setModel(tabla);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
+        
+        
+        try {
+            List<Venta> ventas = d.ListarVentaPor(Integer.parseInt(txtBuscarVerVentas.getText()));
+            TMVenta tm = new TMVenta(ventas);
+            tableVerVentas.setModel(tm);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarVerVentasActionPerformed
+
+    private void btnBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFechaActionPerformed
+        try {
+            List<Venta> ventas = d.BuscarVentaFecha(d.transformarFecha(dateChDesde.getDate()),d.transformarFecha(dateChHasta.getDate()));
+            TMVenta tm = new TMVenta(ventas);
+            tableVerVentas.setModel(tm);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarFechaActionPerformed
 
     public static void main(String args[]) {
 
@@ -1109,6 +1117,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptarBoleta;
     private javax.swing.JButton btnAddProducto;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarFecha;
     private javax.swing.JButton btnBuscarProductoVenta;
     private javax.swing.JButton btnBuscarVerVentas;
     private javax.swing.JButton btnCerrarRegistroProducto;
